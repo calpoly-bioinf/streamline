@@ -1,21 +1,34 @@
 # front end build environment
 FROM python:3
 
-# setup blast
-# download blast executable
-RUN curl https://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/LATEST/ncbi-blast-2.12.0+-x64-linux.tar.gz | tar xzf -
-# RUN cd ncbi-blast-2.12.0+
-RUN mkdir -p /usr/local/ncbi/blast/bin/
-RUN mv /ncbi-blast-2.12.0+/bin/* /usr/local/ncbi/blast/bin/
+RUN apt-get update
+RUN apt-get install -y default-jre
+RUN apt-get install -y rsync
+RUN apt-get install -y vim-tiny
+
+WORKDIR /app
+
+# setup flashfry
+# download flashfry executable
+RUN mkdir -p flashfry/tmp
+
+RUN wget https://github.com/mckennalab/FlashFry/releases/download/1.12/FlashFry-assembly-1.12.jar
+
+RUN mkdir chromosomes
+
+WORKDIR /app/chromosomes
+RUN rsync -avzP rsync://hgdownload.cse.ucsc.edu/goldenPath/hg19/chromosomes/ .
+
+WORKDIR /app
+RUN chmod a+rwx /app/
 
 # Prevents Python from writing pyc files to disc
 ENV PYTHONDONTWRITEBYTECODE=1
 # Prevents Python from buffering stdout and stderr 
 ENV PYTHONUNBUFFERED=1
 
-WORKDIR /app
-
 COPY compare_web/requirements.txt /app/
+
 # install pip requirements
 RUN python -m pip install -r /app/requirements.txt
 

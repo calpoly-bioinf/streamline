@@ -18,7 +18,7 @@ class Job extends Component {
 
     getStatus = () => GetJobStatus(this.props.params.jobId).then(response => {
         if (!response.complete)
-            setTimeout(this.getStatus, 30000)
+            setTimeout(this.getStatus, 100)
 
         this.setState({
             loading : false,
@@ -27,13 +27,14 @@ class Job extends Component {
             complete : response.complete,
             success : response.success
         })
+
     })
 
     startNewJob = () => {
-        window.location.href = '/'
+        window.location.href = '/crisprstreamline'
     }
 
-    downloadAsXml = () => DownloadResults(this.props.params.jobId, 'xml')
+    downloadAsCsv = () => DownloadResults(this.props.params.jobId, 'csv')
     downloadAsTxt = () => DownloadResults(this.props.params.jobId, 'txt')
     downloadAsXlsx = () => DownloadResults(this.props.params.jobId, 'xlsx')
 
@@ -71,9 +72,9 @@ class Job extends Component {
                                                 onClick={this.downloadAsTxt}/>
                                     </Grid.Column>
                                     <Grid.Column>
-                                        <Button content='Download as .xml' color='violet'
+                                        <Button content='Download as .csv' color='violet'
                                                 fluid icon='download' size='large'
-                                                onClick={this.downloadAsXml}/>
+                                                onClick={this.downloadAsCsv}/>
                                     </Grid.Column>
                                 </Grid>
 

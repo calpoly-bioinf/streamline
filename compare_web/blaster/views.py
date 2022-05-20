@@ -10,24 +10,26 @@ import traceback
 #    return render(request, 'static/index.html')
 
 @csrf_exempt
-def create_blast_job(request):
-   try:
+def create_streamline_job(request):
 
-      if request.method == 'POST' and 'identificationsFile' in request.FILES:
+   try:
+      print("Ref Genome: " + request.POST['referenceGenome'])
+      print("Ref Chr: " + request.POST['referenceChromosome'])
+      print(request.FILES['fastaFile'])
+      if request.method == 'POST' and 'fastaFile' in request.FILES:
          # create job id
-         blast_job = job.Job()
-         
+         streamline_job = job.Job()
          # save files to job directory
-         blast_job.create_directory()
+         streamline_job.create_directory()
          # todo: validate files
          # set which databse files to use
-         blast_job.set_database_files(request.POST['queryDatabase'], request.POST['hitDatabase'])
+         streamline_job.set_database_files(request.POST['referenceGenome'], request.POST['referenceChromosome'])
          # save the identification file
-         blast_job.save_identifications_file(request.FILES['identificationsFile'])
-         
+         s = streamline_job.save_identifications_file(request.FILES['fastaFile'])
+         print(s)
          # queue job task
-         tasks.blast.apply_async(args=[blast_job.job_id])
-         blast_job.queued_status()
+         tasks.streamline.apply_async(args=[streamline_job.job_id])
+         streamline_job.queued_status()
 
       else :
          return JsonResponse({
@@ -40,8 +42,9 @@ def create_blast_job(request):
       # return success and job id
       return JsonResponse({
             'success' : True,
-            'job_id' : blast_job.job_id,
+            'job_id' : streamline_job.job_id,
             'error_message' : ''
+#        ,  'output' : output
          })
    except Exception as e:
       print(traceback.format_exc())
@@ -57,15 +60,15 @@ def check_job_status(request):
    try:
       job_id = request.POST['job_id']
       print('checking job', job_id)
-      blast_job = job.Job(job_id)
+      streamline_job = job.Job(job_id)
 
-      blast_job.load()
+      streamline_job.load()
 
       return JsonResponse({
-         'status' : blast_job.status,
-         'message' : blast_job.message,
-         'complete' : blast_job.complete,
-         'success' : blast_job.success,
+         'status' : streamline_job.status,
+         'message' : streamline_job.message,
+         'complete' : streamline_job.complete,
+         'success' : streamline_job.success,
       })
 
    except Exception as e:
@@ -73,7 +76,7 @@ def check_job_status(request):
       return JsonResponse({
          'status' : "Unknown",
          'message' : e.message,
-         'complete' : '',
+         'complete' : False,
          'success' : '',
       })
 
@@ -83,7 +86,7 @@ def available_databases(request):
 
    try:
       fastas = Fastas()
-      databases = fastas.get_databases()
+      databases = fastas.get_databases() # get genome and chromosome
 
       return JsonResponse({
          'databases' : databases
@@ -99,9 +102,9 @@ def get_results(request, format='', job_id=''):
    print('getting results', format, job_id)
 
    try:
-      blast_job = job.Job(job_id)
+      streamline_job = job.Job(job_id)
 
-      results = blast_job.get_results_file(format)
+      results = streamline_job.get_results_file(format)
       print('results file at', results)
 
 

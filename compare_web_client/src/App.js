@@ -1,8 +1,9 @@
 import React, {Component} from "react";
 import {Container, Divider, Grid, Header} from "semantic-ui-react";
-import NewBlast from "./NewBlast";
+import NewStreamline from "./NewStreamline";
 import { Route, Routes } from "react-router-dom";
 import Job from "./Job";
+import ResultsPage from "./Results";
 export default class App extends Component {
 
   render() {
@@ -10,7 +11,7 @@ export default class App extends Component {
         <div className="App">
             <Container style={{marginTop: '2em'}}>
                 <div className='title'>
-                    <Header content='Master Blaster' size='huge' inverted />
+                    <Header content='Crispr Streamline' size='huge' inverted />
                 </div>
 
                 <Divider hidden />
@@ -19,8 +20,9 @@ export default class App extends Component {
                     <Grid.Column width={2}/>
                     <Grid.Column width={12}>
                         <Routes>
-                            <Route path='/' element={<NewBlast />}/>
+                            <Route path='/' element={<NewStreamline />}/>
                             <Route path='/job/:jobId' element={<Job />}/>
+                            <Route path='/results' element={<ResultsPage results={'hi'} />}/>
                         </Routes>
 
                     </Grid.Column>
