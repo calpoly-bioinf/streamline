@@ -19,7 +19,14 @@ RUN wget https://github.com/mckennalab/FlashFry/releases/download/1.12/FlashFry-
 RUN mkdir chromosomes
 
 WORKDIR /app/chromosomes
-RUN rsync -avzP rsync://hgdownload.cse.ucsc.edu/goldenPath/hg19/chromosomes/ .
+
+RUN mkdir hg19
+WORKDIR /app/chromosomes/hg19
+RUN rsync -avzP --exclude='_' --exclude='*random.fa.gz' --exclude='*alt.fa.gz' rsync://hgdownload.cse.ucsc.edu/goldenPath/hg19/chromosomes/ .
+RUN cd ..
+RUN mkdir hg38
+WORKDIR /app/chromosomes/hg38
+RUN rsync -avzP --exclude='_' --exclude='*random.fa.gz' --exclude='*alt.fa.gz' rsync://hgdownload.cse.ucsc.edu/goldenPath/hg38/chromosomes/ .
 
 WORKDIR /app
 RUN chmod a+rwx /app/
