@@ -25,7 +25,7 @@ def streamline(job_id):
         print(f'using |{fasta}| |{genome}| |{chromosome}|')
         #TODO: need genome logic to switch genomes
         os.system("mkdir temp")
-        os.system("java -Xmx4g -jar FlashFry-assembly-1.12.jar index --tmpLocation ./temp --database " + chromosome + "_database --reference chromosomes/"+ chromosome + ".fa.gz --enzyme spcas9ngg")
+        os.system("java -Xmx4g -jar FlashFry-assembly-1.12.jar index --tmpLocation ./temp --database " + chromosome + "_database --reference chromosomes/"+ genome + "/"+ chromosome + ".fa.gz --enzyme spcas9ngg")
         os.system("java -Xmx4g -jar FlashFry-assembly-1.12.jar discover --database " + chromosome + "_database --fasta " + fasta + " --output flashfry.output --positionOutput")
         # do pipeline stuff
         f = open("flashfry.output", "r")
