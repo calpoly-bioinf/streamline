@@ -4,15 +4,15 @@ FROM node:lts as frontend-build
 WORKDIR /
 
 # copy packge info
-COPY compare_web_client/package.json ./
-COPY compare_web_client/package-lock.json ./
+COPY streamline_web_client/package.json ./
+COPY streamline_web_client/package-lock.json ./
 
 # install package dependencies
 RUN npm install
 
 # copy front end code
-COPY compare_web_client/src ./src
-COPY compare_web_client/public ./public
+COPY streamline_web_client/src ./src
+COPY streamline_web_client/public ./public
 
 # create prodcution build of application
 RUN npm run-script build
