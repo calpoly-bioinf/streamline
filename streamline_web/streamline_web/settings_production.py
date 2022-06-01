@@ -11,7 +11,7 @@ CELERY_TASK_SERIALIZER = 'json'
 
 STREAMLINE_WEB_DATA_DIRECTORY = '/data_directory'
 STREAMLINE_WEB_FASTA_DIRECTORY = ''
-BLAST_PATH = '/usr/local/ncbi/streamline/bin'
+STREAMLINE_PATH = '/usr/local/ncbi/streamline/bin'
 
 """
 Django settings for streamline_web project.

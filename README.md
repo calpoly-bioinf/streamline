@@ -18,5 +18,5 @@ This application is a web hosted pipeline between [FlashFry](https://github.com/
 
 ### Running
 
-_Run docker compose up_
+_Run_
 `docker-compose up -d --build`
