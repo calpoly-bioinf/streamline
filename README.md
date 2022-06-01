@@ -1,5 +1,9 @@
 # CRISPR Streamline
 
+Hosted [here](https://birg.dev/crisprstreamline) at the Cal Poly Bioinformatics Research Group
+
+FAQ and more information [here](https://streamline.birg.dev/home)
+
 This application is a web hosted pipeline between [FlashFry](https://github.com/mckennalab/FlashFry) and the [UCSC Genome Browser API](https://genome.ucsc.edu/).
 
 ### Backend Application Request Flow
