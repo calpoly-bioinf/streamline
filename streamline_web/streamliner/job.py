@@ -11,8 +11,8 @@ class Job:
 
    logger = logging.getLogger(__name__)
 
-   job_data_directory = settings.COMPARE_WEB_DATA_DIRECTORY
-   fasta_directory = settings.COMPARE_WEB_FASTA_DIRECTORY
+   job_data_directory = settings.STREAMLINE_WEB_DATA_DIRECTORY
+   fasta_directory = settings.STREAMLINE_WEB_FASTA_DIRECTORY
 
    genome_filename = ''
    chromosome_filename = ''
@@ -79,13 +79,13 @@ class Job:
    def get_results_file(self, format='csv'):
       if format == 'csv':
          #re_file_pattern = 'subset_vs_.*.xml'
-         re_file_pattern = 'streamline-results.csv'
+         re_file_pattern = 'streamline_web-results.csv'
       elif format == 'txt':
          #re_file_pattern = 'subset_vs_.*.txt'
-         re_file_pattern = 'streamline-results.txt'
+         re_file_pattern = 'streamline_web-results.txt'
       elif format == 'xlsx':
          #re_file_pattern = 'subset_vs_.*.txt' # we'll fix this later
-         re_file_pattern = 'streamline-results.xlsx'
+         re_file_pattern = 'streamline_web-results.xlsx'
 
       dir = self._job_directory()
       for _, _, files in os.walk(dir):

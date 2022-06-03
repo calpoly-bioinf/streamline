@@ -2,19 +2,19 @@ services:
   client:
     build:
       context: .
-      dockerfile: compareWebClient.Dockerfile
+      dockerfile: streamlineWebClient.Dockerfile
     ports:
       - "7012:80"
   api:
     build:
       context: .
-      dockerfile: compareWebApi.Dockerfile
+      dockerfile: streamlineWebApi.Dockerfile
     ports:
       - "7011:80"
     volumes:
       - ./data_directory:/data_directory
       - ./refseq_databases:/fasta_files
-      - ./compare_web:/app
+      - ./streamline_web:/app
     depends_on:
       - rabbit
       - celeryworker
@@ -25,7 +25,7 @@ services:
   celeryworker:
     build:
       context: .
-      dockerfile: compareWebWorker.Dockerfile
+      dockerfile: streamlineWebWorker.Dockerfile
     volumes:
       - ./data_directory:/data_directory
       - ./refseq_databases:/fasta_files

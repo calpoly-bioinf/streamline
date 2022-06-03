@@ -3,9 +3,9 @@ import os
 from celery import Celery
 
 # Set the default Django settings module for the 'celery' program.
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'compare_web.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'streamline_web.settings')
 
-app = Celery('compare_web')
+app = Celery('streamline_web')
 
 # Using a string here means the worker doesn't have to serialize
 # the configuration object to child processes.

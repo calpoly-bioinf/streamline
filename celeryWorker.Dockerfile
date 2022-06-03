@@ -8,7 +8,7 @@ ENV PYTHONUNBUFFERED=1
 WORKDIR /app
 
 # copy backend application
-COPY compare_web/ /app/
+COPY streamline_web/ /app/
 
 # copy flashfry
 COPY FlashFry-assembly-1.12.jar /usr/local/flashfry
@@ -17,4 +17,4 @@ COPY FlashFry-assembly-1.12.jar /usr/local/flashfry
 RUN python -m pip install -r /app/requirements.txt
 
 # application entry point
-CMD ["celery", "-A", "compare_web", "worker", "-l", "INFO"]
+CMD ["celery", "-A", "streamline_web", "worker", "-l", "INFO"]

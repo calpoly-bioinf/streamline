@@ -45,7 +45,7 @@ class Job extends Component {
                 {this.state.loading
                     ? <Loader active inline='centered' size='large' content='Loading Job Status' />
                     : <span>
-                        <Header content='Blast Job Status' size='large' color='blue' dividing/>
+                        <Header content='Streamline Job Status' size='large' color='blue' dividing/>
 
                         <Header content={this.state.status} size='large' color='violet' textAlign='center'/>
 
@@ -83,7 +83,7 @@ class Job extends Component {
 
 
 
-                        <Button content='Start New Blast' color='blue' basic fluid size='large' onClick={this.startNewJob}/>
+                        <Button content='Start New Streamline' color='blue' basic fluid size='large' onClick={this.startNewJob}/>
 
                     </span>}
 

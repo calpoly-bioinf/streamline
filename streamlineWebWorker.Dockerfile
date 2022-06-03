@@ -36,16 +36,16 @@ ENV PYTHONDONTWRITEBYTECODE=1
 # Prevents Python from buffering stdout and stderr 
 ENV PYTHONUNBUFFERED=1
 
-COPY compare_web/requirements.txt /app/
+COPY streamline_web/requirements.txt /app/
 
 # install pip requirements
 RUN python -m pip install -r /app/requirements.txt
 
 # copy django app files
-COPY compare_web/blaster /app/blaster
-COPY compare_web/compare_web /app/compare_web
+COPY streamline_web/streamliner /app/streamliner
+COPY streamline_web/streamline_web /app/streamline_web
 # with production settings
-COPY compare_web/compare_web/settings_production.py /app/compare_web/settings.py
+COPY streamline_web/streamline_web/settings_production.py /app/streamline_web/settings.py
 
 # application entry point
-ENTRYPOINT celery -A compare_web worker --autoscale 10 --loglevel=info
+ENTRYPOINT celery -A streamline_web worker --autoscale 10 --loglevel=info

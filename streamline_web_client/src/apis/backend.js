@@ -25,7 +25,7 @@ export async function CreateStreamlineJob(referenceGenome, referenceChromosome, 
 
     }
     catch (e) {
-        console.log("catch in create streamline job")
+        console.log("catch in create streamline_web job")
     }
 }
 

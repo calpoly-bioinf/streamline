@@ -11,7 +11,7 @@ class Fastas:
 
     available_databases = []
     scanned = False
-    fasta_directory = settings.COMPARE_WEB_FASTA_DIRECTORY
+    fasta_directory = settings.STREAMLINE_WEB_FASTA_DIRECTORY
 
     refseq_regex  = 'RefSeq_([A-Za-z]+)_(\d+)_(?:.*).fasta'
     uniprot_regex = 'UniProtKB_([A-Za-z]+)_([0-9_]+).fasta'
